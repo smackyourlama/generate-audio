@@ -5,5 +5,5 @@ services:
     buildCommand: ""
     startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
     envVars:
-      - key: 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
-        sync: false
+      - key: OPENAI_API_KEY
+        value: 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
