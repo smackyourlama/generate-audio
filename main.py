@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, Form
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 import openai
 import uuid
 import os
@@ -7,6 +8,14 @@ import os
 app = FastAPI()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Replace with frontend URL in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/generate-audio")
 async def generate_audio(text: str = Form(...), voice: str = Form("alloy")):
